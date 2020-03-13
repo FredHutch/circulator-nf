@@ -11,7 +11,7 @@ RUN   apt-get update && \
       apt-get install --yes   git wget unzip bzip2 xz-utils make g++ zlib1g-dev libncurses5-dev libbz2-dev \
                               liblzma-dev libcurl4-openssl-dev libpng-dev libssl-dev libboost-all-dev \
                               libstatistics-descriptive-perl libxml-parser-perl libdbi-perl \
-                              python3 python3-pip default-jdk
+                              python3.5 python3-pip default-jdk
 
 RUN   apt-get install -y locales && \
       sed -i -e 's/# \(en_GB\.UTF-8 .*\)/\1/' /etc/locale.gen && \
@@ -73,7 +73,7 @@ RUN cd /usr/local/bin/ && \
     ln -s canu-${CANU_VER}/Linux-amd64/bin/* /usr/local/bin/
 
 # SPAdes
-ENV SPADES_VER=3.14.0
+ENV SPADES_VER=3.7.1
 RUN cd /usr/local/bin/ && \
     wget http://cab.spbu.ru/files/release${SPADES_VER}/SPAdes-${SPADES_VER}-Linux.tar.gz && \
     tar -xzvf SPAdes-${SPADES_VER}-Linux.tar.gz && \
