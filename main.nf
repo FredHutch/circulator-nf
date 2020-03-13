@@ -113,7 +113,7 @@ echo ""
 echo "STARTING CIRCLATOR"
 echo ""
 
-circlator all --assembler canu ${fasta} \$READS ${name}
+circlator all --threads ${task.cpus} ${fasta} \$READS ${name}
 
 """
 
