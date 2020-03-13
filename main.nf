@@ -79,6 +79,8 @@ process Circlator {
 
   // Docker container to use
   container "quay.io/fhcrc-microbiome/circlator:latest"
+  cpus 2
+  memory 4.GB
 
   // The `publishDir` tag points to a folder in the host system where all of the output files from this folder will be placed
   publishDir "${params.output_folder}" 
