@@ -95,6 +95,15 @@ process Circulator {
 
 set -e
 
+# If the reads are in BAM format, convert to FASTQ
+if [[ "${reads.name}" == *bam ]]; then
+    samtools index ${reads}
+    circlator bam2reads ${reads} reads
+    READS=reads.fasta
+else
+    READS=${reads}
+fi
+
 df -h
 echo ""
 ls -lahtr
@@ -102,7 +111,7 @@ echo ""
 echo "STARTING CIRCULATOR"
 echo ""
 
-circlator all --assembler canu ${fasta} ${reads} ${name}
+circlator all --assembler canu ${fasta} \$READS ${name}
 
 """
 
