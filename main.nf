@@ -74,8 +74,8 @@ Channel.from(
     input_ch
 }
 
-// Run Circulator
-process Circulator {
+// Run Circlator
+process Circlator {
 
   // Docker container to use
   container "quay.io/fhcrc-microbiome/circlator:latest"
@@ -108,7 +108,7 @@ df -h
 echo ""
 ls -lahtr
 echo ""
-echo "STARTING CIRCULATOR"
+echo "STARTING CIRCLATOR"
 echo ""
 
 circlator all --assembler canu ${fasta} \$READS ${name}
