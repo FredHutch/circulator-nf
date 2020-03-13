@@ -78,7 +78,7 @@ Channel.from(
 process Circulator {
 
   // Docker container to use
-  container "sangerpathogens/circlator:release-v1.5.5-docker4"
+  container "quay.io/fhcrc-microbiome/circlator:latest"
 
   // The `publishDir` tag points to a folder in the host system where all of the output files from this folder will be placed
   publishDir "${params.output_folder}" 
