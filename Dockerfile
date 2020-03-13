@@ -77,6 +77,6 @@ RUN cd /usr/local/bin/ && \
     tar -xzvf SPAdes-${SPADES_VER}-Linux.tar.gz && \
     rm SPAdes-${SPADES_VER}-Linux.tar.gz
 
-RUN   pip3 install circlator
+RUN   pip3 install Cython && pip3 install circlator
 
 RUN   circlator progcheck && circlator test /tmp/circlator-test && rm -r /tmp/circlator-test
