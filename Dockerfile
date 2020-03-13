@@ -37,7 +37,8 @@ ENV PRODIGAL_VER=2.6.3
 RUN cd /usr/local && \
     wget https://github.com/hyattpd/Prodigal/releases/download/v$PRODIGAL_VER/prodigal.linux && \
     chmod +x prodigal.linux && \
-    mv prodigal.linux /usr/local/bin/
+    mv prodigal.linux /usr/local/bin/prodigal && \
+    prodigal -h
 
 # Samtools
 ENV SAMTOOLS_VER=1.10
@@ -67,15 +68,19 @@ RUN cd /usr/local && \
 ENV CANU_VER=1.9
 RUN cd /usr/local/bin/ && \
     wget https://github.com/marbl/canu/releases/download/v${CANU_VER}/canu-${CANU_VER}.Linux-amd64.tar.xz && \
-    tar -xJf canu-${CANU_VER}.Linux-amd64.tar.xz && \
-    rm canu-${CANU_VER}.Linux-amd64.tar.xz
+    tar -xvJf canu-${CANU_VER}.Linux-amd64.tar.xz && \
+    rm canu-${CANU_VER}.Linux-amd64.tar.xz && \
+    ln -s canu-${CANU_VER}/Linux-amd64/bin/* /usr/local/bin/
 
 # SPAdes
 ENV SPADES_VER=3.14.0
 RUN cd /usr/local/bin/ && \
     wget http://cab.spbu.ru/files/release${SPADES_VER}/SPAdes-${SPADES_VER}-Linux.tar.gz && \
     tar -xzvf SPAdes-${SPADES_VER}-Linux.tar.gz && \
-    rm SPAdes-${SPADES_VER}-Linux.tar.gz
+    rm SPAdes-${SPADES_VER}-Linux.tar.gz && \
+    ln -s SPAdes-${SPADES_VER}-Linux/bin/* /usr/local/bin/ && \
+    ln -s /usr/bin/python3 /usr/bin/python && \
+    spades.py
 
 RUN   pip3 install Cython && pip3 install circlator
 
