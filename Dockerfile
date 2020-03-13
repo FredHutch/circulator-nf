@@ -65,7 +65,7 @@ RUN cd /usr/local && \
     ln -s $PWD/bin/* /usr/local/bin/
 
 # Canu
-ENV CANU_VER=1.9
+ENV CANU_VER=1.7.1
 RUN cd /usr/local/bin/ && \
     wget https://github.com/marbl/canu/releases/download/v${CANU_VER}/canu-${CANU_VER}.Linux-amd64.tar.xz && \
     tar -xvJf canu-${CANU_VER}.Linux-amd64.tar.xz && \
