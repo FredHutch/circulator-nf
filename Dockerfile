@@ -3,6 +3,7 @@ FROM ubuntu:20.04
 
 ENV   BUILD_DIR=/opt/circlator
 ENV   RELEASE=v1.5.5-docker4
+ENV   DEBIAN_FRONTEND=noninteractive
 
 # Install the dependancies
 RUN   apt-get update && \
@@ -10,8 +11,18 @@ RUN   apt-get update && \
       apt-get install --yes apt-utils && \
       apt-get install --yes   git wget unzip bzip2 xz-utils make g++ zlib1g-dev libncurses5-dev libbz2-dev \
                               liblzma-dev libcurl4-openssl-dev libpng-dev libssl-dev libboost-all-dev \
-                              libstatistics-descriptive-perl libxml-parser-perl libdbi-perl \
-                              python3.5 python3-pip default-jdk
+                              libstatistics-descriptive-perl libxml-parser-perl libdbi-perl default-jdk \
+                              build-essential checkinstall && \
+      apt-get install --yes   libreadline-gplv2-dev libncursesw5-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev
+
+# Install Python 3.5 (required by SPAdes)
+RUN cd /usr/src && \
+    wget https://www.python.org/ftp/python/3.5.6/Python-3.5.6.tgz && \
+    tar xzf Python-3.5.6.tgz && \
+    cd Python-3.5.6 && \
+    ./configure --enable-optimizations && \
+    make install && \
+    ln -s $PWD/python /usr/local/bin/
 
 RUN   apt-get install -y locales && \
       sed -i -e 's/# \(en_GB\.UTF-8 .*\)/\1/' /etc/locale.gen && \
