@@ -1,0 +1,2 @@
+name,fasta,reads
+test,data/test_ref.fa,data/test_reads.fq.gz
