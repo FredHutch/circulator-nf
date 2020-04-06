@@ -11,6 +11,14 @@ def helpMessage() {
       --manifest            File containing the location of all input genomes and reads to process
       --output_folder       Folder to place analysis outputs
 
+    Optional Arguments (passed directly to circlator):
+      --merge_min_id        Default: 85
+      --merge_breaklen      Default: 1000
+      --b2r_length_cutoff   Default: 100000
+      --merge_min_length_merge  Default: 4000
+      --merge_reassemble_end    Default: 1000
+      --merge_ref_end       Default: 15000
+
     Manifest:
 
         The manifest is a comma-separated table (CSV) with three columns, name, fasta, and reads. For example,
@@ -30,6 +38,14 @@ if (params.help || params.manifest == null || params.output_folder == null){
     // Exit out and do not run anything else
     exit 1
 }
+
+// Default options
+params.merge_min_id = 85
+params.merge_breaklen = 1000
+params.b2r_length_cutoff = 100000
+params.merge_min_length_merge = 4000
+params.merge_reassemble_end = 1000
+params.merge_ref_end = 15000
 
 // Make sure the manifest file exists
 if ( file(params.manifest).isEmpty() ){
@@ -115,7 +131,17 @@ echo ""
 echo "STARTING CIRCLATOR"
 echo ""
 
-circlator all --threads ${task.cpus} ${fasta} \$READS ${name}
+circlator all \
+    --threads ${task.cpus} \
+    --merge_min_id ${params.merge_min_id} \
+    --merge_breaklen ${params.merge_breaklen} \
+    --b2r_length_cutoff ${params.b2r_length_cutoff} \
+    --merge_min_length_merge ${params.merge_min_length_merge} \
+    --merge_reassemble_end ${params.merge_reassemble_end} \
+    --merge_ref_end ${params.merge_ref_end} \
+    ${fasta} \
+    \$READS \
+    ${name}
 
 """
 
