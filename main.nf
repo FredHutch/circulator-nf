@@ -95,8 +95,7 @@ process Circlator {
 
   // Docker container to use
   container "quay.io/fhcrc-microbiome/circlator:latest"
-  cpus { 2 * task.attempt }
-  memory { 4.GB * task.attempt }
+  label "mem_medium"
   errorStrategy 'retry'
   maxRetries 3
 

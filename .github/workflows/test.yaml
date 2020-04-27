@@ -22,4 +22,5 @@ jobs:
             --output_folder output \
             -work-dir work/ \
             -with-docker ubuntu:20.04 \
+            -profile testing \
 
